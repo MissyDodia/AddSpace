@@ -1,0 +1,11 @@
+h1 {
+    font-weight: bold;
+    font-size: 5em;
+    font-family: fantasy; /* Increase font size for h1 */
+    transform: rotate(0deg); /* Rotate the h1 element by 5 degrees */
+    transition: font-size 0.3s ease-in-out; /* Add transition for font size */
+}
+
+h1:hover {
+    font-size: 2.2em; /* Increase font size on hover */
+}

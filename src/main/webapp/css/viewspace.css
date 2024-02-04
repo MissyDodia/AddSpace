@@ -1,0 +1,74 @@
+/* Updated CSS styles for the card layout */
+body{
+	background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px; /* Adjust for card margin */
+}
+
+.card {
+    background-color: white;
+    flex: 0 0 30%; /* Adjust as needed, this is for three cards in a row */
+    margin: 10px;
+    box-shadow: 18px 7px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px; /* Increase border-radius for a rounded appearance */
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    padding: 20px; /* Adjust padding for more space inside the card */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add transitions */
+}
+
+.card:hover {
+    transform: scale(1.1); /* Increase the scale on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust box-shadow on hover */
+}
+
+.card-title {
+    font-size: 1.5em; /* Increase font size for the title */
+    font-weight: bold;
+    margin-bottom: 10px; /* Add margin to separate title from other content */
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.btn-book {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out; /* Add transition for button color */
+}
+
+.btn-book:hover {
+    background-color: #0056b3; /* Change button color on hover */
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 5em;
+    font-family: fantasy; /* Increase font size for h1 */
+    transform: rotate(0deg); /* Rotate the h1 element by 5 degrees */
+    transition: font-size 0.3s ease-in-out; /* Add transition for font size */
+}
+
+h1:hover {
+    font-size: 2.2em; /* Increase font size on hover */
+}
