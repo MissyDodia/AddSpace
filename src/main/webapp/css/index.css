@@ -47,5 +47,19 @@ body{
 .three-d-button:hover:before {
     transform: perspective(5px) rotateX(-70deg);
 }
+ ul, ol {
+    list-style-type: none;  /* Removes bullet points */
+    padding-left: 0;  /* Removes padding */
+  }
 
+  /* Removes underline from links */
+  li a {
+    text-decoration: none;  /* Removes underline */
+    color: inherit;  /* Keeps the default text color or you can customize */
+  }
+
+  /* Ensure underline doesn't appear on hover */
+  li a:hover {
+    text-decoration: none;
+  }
 /* Add other styles as needed */

@@ -52,81 +52,85 @@ public class SpaceModel {
 	    System.out.println("Found SpaceBean: " + spacebean);
 	    return spacebean;
 	}
+	 public long addSpace(SpaceBean spaceBean) {
+	        Connection con = null;
+	        long pk = 0;
+	        try {
+	            con = Model.getCon();
+	            String sql = "INSERT INTO space (spacename, location, area, type, company, duration, price, admine_id, image1, image2, image3) "
+	                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            PreparedStatement preparedStatement = con.prepareStatement(sql);
 
-	public long addSpace(SpaceBean spaceBean) {
-		Connection con = null;
-		long pk =0;
-        try {
-           
-           con = Model.getCon();
+	            preparedStatement.setString(1, spaceBean.getSpacename());
+	            preparedStatement.setString(2, spaceBean.getLocation());
+	            preparedStatement.setString(3, spaceBean.getArea());
+	            preparedStatement.setString(4, spaceBean.getType());
+	            preparedStatement.setString(5, spaceBean.getCompany());
+	            preparedStatement.setString(6, spaceBean.getDuration());
+	            preparedStatement.setString(7, spaceBean.getPrice());
+	            preparedStatement.setLong(8, spaceBean.getAdmine_id());
 
-            String sql = "  insert into space (spacename, location, area, type, company, duration, price,admine_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
+	            preparedStatement.setBlob(9, spaceBean.getImage1());
+	            preparedStatement.setBlob(10, spaceBean.getImage2());
+	            preparedStatement.setBlob(11, spaceBean.getImage3());
 
-            preparedStatement.setString(1, spaceBean.getSpacename());
-            preparedStatement.setString(2, spaceBean.getLocation());
-            preparedStatement.setString(3, spaceBean.getArea());
-            preparedStatement.setString(4, spaceBean.getType());
-            preparedStatement.setString(5, spaceBean.getCompany());
-            preparedStatement.setString(6, spaceBean.getDuration());
-            preparedStatement.setString(7, spaceBean.getPrice());
-            preparedStatement.setLong(8, spaceBean.getAdmine_id());
-
-            pk = preparedStatement.executeUpdate();
-
-           
-
-            
-        } catch (Exception e) {
-	        e.printStackTrace(); // Handle the exception properly
-	    } 
-        return pk;
-    }
-	
-	
-	public List<SpaceBean> list() throws SQLException {
-	    Connection con = null;
-	    PreparedStatement ps = null;
-	    ResultSet rs = null;
-	    List<SpaceBean> list = new ArrayList<>();
-
-	    try {
-	        con = Model.getCon();
-	        ps = con.prepareStatement("Select * from space where id not in (SELECT s.id\r\n"
-	        		+ "FROM space s\r\n"
-	        		+ "inner JOIN booking b ON s.id = b.spaceid\r\n"
-	        		+ "WHERE b.status in ('Confirmed'));");
-	        rs = ps.executeQuery();
-
-	        while (rs.next()) {
-	            SpaceBean spacebean = new SpaceBean();
-	            spacebean.setId(rs.getLong(1));
-	            spacebean.setSpacename(rs.getString(2));
-	            spacebean.setLocation(rs.getString(3));
-	            spacebean.setArea(rs.getString(4));
-	            spacebean.setType(rs.getString(5));
-	            spacebean.setCompany(rs.getString(6));
-	            spacebean.setDuration(rs.getString(7));
-	            spacebean.setPrice(rs.getString(8));
-	            spacebean.setAdmine_id(rs.getLong(9));
-	            list.add(spacebean);
+	            pk = preparedStatement.executeUpdate();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
 	        }
-	    } finally {
-	        // Close resources in the finally block
-	        if (rs != null) {
-	            rs.close();
-	        }
-	        if (ps != null) {
-	            ps.close();
-	        }
-	        if (con != null) {
-	            con.close();
-	        }
+	        return pk;
 	    }
+	 public List<SpaceBean> list() throws SQLException {
+		    Connection con = null;
+		    PreparedStatement ps = null;
+		    ResultSet rs = null;
+		    List<SpaceBean> list = new ArrayList<>();
 
-	    System.out.println("list" + list);
-	    return list;
-	}
+		    try {
+		        con = Model.getCon();
+		        ps = con.prepareStatement(
+		            "SELECT id, spacename, location, area, type, company, duration, price, admine_id, image1, image2, image3 " +
+		            "FROM space WHERE id NOT IN (" +
+		            "SELECT s.id FROM space s " +
+		            "INNER JOIN booking b ON s.id = b.spaceid " +
+		            "WHERE b.status IN ('Confirmed')" +
+		            ");"
+		        );
+		        rs = ps.executeQuery();
+
+		        while (rs.next()) {
+		            SpaceBean spacebean = new SpaceBean();
+		            spacebean.setId(rs.getLong("id"));
+		            spacebean.setSpacename(rs.getString("spacename"));
+		            spacebean.setLocation(rs.getString("location"));
+		            spacebean.setArea(rs.getString("area"));
+		            spacebean.setType(rs.getString("type"));
+		            spacebean.setCompany(rs.getString("company"));
+		            spacebean.setDuration(rs.getString("duration"));
+		            spacebean.setPrice(rs.getString("price"));
+		            spacebean.setAdmine_id(rs.getLong("admine_id"));
+		            
+		            spacebean.setPhoto1(rs.getBlob("image1"));
+		            spacebean.setPhoto2(rs.getBlob("image2"));
+		            spacebean.setPhoto3(rs.getBlob("image3"));
+
+		            list.add(spacebean);
+		        }
+		    } finally {
+		        if (rs != null) {
+		            rs.close();
+		        }
+		        if (ps != null) {
+		            ps.close();
+		        }
+		        if (con != null) {
+		            con.close();
+		        }
+		    }
+
+		    System.out.println("list" + list);
+		    return list;
+		}
 
 	
 	public boolean deletespace(long id) {
@@ -153,22 +157,9 @@ public class SpaceModel {
 	public static void main(String[] args) throws SQLException {
        
 
-        SpaceBean spaceBean= new SpaceBean();
-		
-			spaceBean = findById((long) 2);
-	
+			
 
-      
-           
-            System.out.println("Space ID: " + spaceBean.getId());
-            System.out.println("Space Name: " + spaceBean.getSpacename());
-            System.out.println("Location: " + spaceBean.getLocation());
-            System.out.println("Area: " + spaceBean.getArea());
-            System.out.println("Type: " + spaceBean.getType());
-            System.out.println("Company: " + spaceBean.getCompany());
-            System.out.println("Duration: " + spaceBean.getDuration());
-            System.out.println("Price: " + spaceBean.getPrice());
-            System.out.println("Admin ID: " + spaceBean.getAdmine_id());
+            
      
 	}
 }

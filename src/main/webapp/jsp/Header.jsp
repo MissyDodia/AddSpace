@@ -56,6 +56,28 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.carousel-inner img {
+    width: 70%;
+    height: 521px; /* Set a consistent height for images */
+    object-fit: cover;
+    /* Ensures images fit nicely without distortion */
+  }
+
+  /* Ensure no underlines on links inside list items */
+  li a {
+  margin-bottom:10px;
+    text-decoration: none !important; /* Removes underline */
+    color: inherit; /* Keeps default or parent color */
+  }
+
+  li a:hover {
+    text-decoration: none !important; /* No underline on hover */
+  }
+
+  li {
+    list-style: none; /* Removes bullet points */
+  }
+
     
 </style>
 
@@ -66,11 +88,11 @@
     UserBean bean = (UserBean) session.getAttribute("userbean");
 %>
 
-<nav class="border-gray-200 bg-blue-50 rounded-lg shadow m-4 dark:bg-gray-800 dark:border-gray-700">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse nav-logo">
-            <img src="image/logo1-removebg-preview.png" class="h-12 transform -rotate-6 transition-transform duration-300 ease-in-out" alt="adspace logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Adspace</span>
+<nav class="border-gray-200 bg-blue-50 rounded-lg shadow m-2 dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+        <a href="#" class="flex items-center space-x-1 rtl:space-x-reverse nav-logo">
+            <img src="image/test1-removebg-preview.png" class="h-12  transform -rotate-6 transition-transform duration-300 ease-in-out" alt="adspace logo" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white ">Adspace</span>
         </a>
         <button data-collapse-toggle="navbar-solid-bg" type="button"
                 class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -88,10 +110,10 @@
                     if (bean != null) {
                         String role = bean.getRole(); // Get the role once to avoid multiple method calls
 
-                        if ("admine".equals(role)) {
+                        if ("admin".equals(role)) {
                 %>
                             <li>
-                                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Admine</a>
+                                <a href="WelcomeCtl" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Admine</a>
                             </li>
                             <li>
                                 <a href="AddSpaceCtl" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Add-Space</a>
@@ -100,7 +122,7 @@
                             <a href="ViewSpaceCtl" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Space</a>
                         </li>
                             <li>
-<div class="dropdown">
+<div class="dropdown block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
     <button class="dropbtn">Bookings</button>
     <div class="dropdown-content">
         <a href="ViewAllBooking">View Booking</a>
@@ -118,7 +140,7 @@
                         } else if ("user".equals(role)) {
                         %>
                             <li>
-                                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">User</a>
+                                <a href="WelcomeCtl" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">User</a>
                             </li>
                              <li>
                             <a href="ViewSpaceCtl" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Space</a>
